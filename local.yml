@@ -1,0 +1,148 @@
+---
+- hosts: all
+  become: true
+  # Init vars to be replaced in general role
+  vars:
+    adminemail: ""
+    zone: IL-HA
+    email: nobody@omc.co.il
+    password: verysecurerandompassword
+
+  # vars_files: 
+  #   - vars/main.yml
+  # environment:
+  #   ANSIBLE_CONFIG: "{{ ansible_pull['dest'] }}/ansible.cfg"
+  # vars:
+  #   ansible_pull:
+  #     log: /root/ansible_pull.log
+  #     deploy_key: /dev/shm/deploy_key
+  #     dest: /tmp/ansible
+  pre_tasks:
+    # - ansible.builtin.file:
+    #     path:  roles
+    #     state: absent
+    #   tags: always
+
+    - name: Get collection
+      ansible.builtin.command: ansible-galaxy collection install -r requirements.yml
+      delegate_to: localhost
+      changed_when: false
+      tags: always
+
+    # - ansible.builtin.set_fact:
+    #     path_to_roles: "../../collections/ansible_collections/pincher95/cloudwm_collection/roles/"
+
+    # - block:
+    #     - ansible.builtin.lineinfile:
+    #         dest:   .gitignore
+    #         regexp: '^\/roles$'
+    #         line:   '/roles'
+    #         state:  present
+    #   rescue:
+    #     - ansible.builtin.debug:
+    #         msg: "No .gitignore file"
+    #   tags: always
+
+  # tasks:
+  #   - name: Install playbook
+  #     ansible.builtin.include_tasks: install.yml
+  #     tags: always
+
+
+  post_tasks:
+    
+    - name: Wordpress service
+      ansible.builtin.include_role:
+        name: "{{ roles.role }}"
+      loop_control:
+        loop_var: roles
+      when: service is defined and service == "wordpress"
+      loop:
+        - role: general
+        - role: nginx
+        - role: certbot
+        - role: nginx-enable-ssl-letsencrypt
+        - role: sendmail
+        - role: php_versions
+        # - role: php
+        # - role: mysql
+        # - role: php-mysql
+        - role: phpmyadmin
+        - role: wordpress
+      vars:
+        # General vars
+        upgrade_os: false
+        # Certbot vars
+        certbot_certs:
+          - email: "{{ adminemail }}"
+            domains: 
+              - "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
+        # nginx-enable-ssl-letsencrypt vars
+        domain_name: "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
+        # PHP vars
+        php_version: '7.4'
+        php_webserver_daemon: "nginx"
+        # MySQL vars
+        mysql_root_password_update: true
+        mysql_root_password: "{{ password }}"
+        # Wordpress vars
+        wordpress_version: '5.8.2'
+        # PhpMyAdmin vars
+        phpmyadmin_webserver: nginx
+        
+    
+    # - name: General role
+    #   ansible.builtin.include_role:
+    #     name: general
+    #     apply:
+    #       tags: ["always"]
+    #   tags: ["always"]
+
+    # - name: Apache role
+    #   ansible.builtin.include_role:
+    #     name: apache
+    #     apply:
+    #       tags: ["apache"]
+    #   tags: ["apache"]
+
+    # - name: Nginx role
+    #   ansible.builtin.include_role:
+    #     name: nginx
+    #     apply:
+    #       tags: ["nginx", "wordpress"]
+    #   tags: ["nginx", "wordpress"]
+
+    # - name: MySQL role
+    #   ansible.builtin.include_role:
+    #     name: mysql
+    #     apply:
+    #       tags: ["mysql", "wordpress"]
+    #   tags: ["mysql", "wordpress"]
+
+    # - name: PHP role
+    #   ansible.builtin.include_role:
+    #     name: php
+    #     apply:
+    #       tags: ["php", "wordpress"]
+    #   tags: ["php", "wordpress"]
+
+    # - name: PhpMyAdmin role
+    #   ansible.builtin.include_role:
+    #     name: phpmyadmin
+    #     apply:
+    #       tags: ["phpmyadmin", "wordpress"]
+    #   tags: ["phpmyadmin", "wordpress"]
+
+    # - name: Certbot role
+    #   ansible.builtin.include_role:
+    #     name: certbot
+    #     apply:
+    #       tags: ["certbot", "wordpress"]
+    #   tags: ["certbot", "wordpress"]
+      
+    # - name: PHP version role
+    #   ansible.builtin.include_role:
+    #     name: php_version
+    #     apply:
+    #       tags: ["php_version", "wordpress"]
+    #   tags: ["php_version", "wordpress"]
