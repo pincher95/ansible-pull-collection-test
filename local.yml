@@ -66,7 +66,7 @@
         - role: php_versions
         # - role: php
         # - role: mysql
-        # - role: php-mysql
+        - role: php-mysql
         - role: phpmyadmin
         - role: wordpress
       vars:
@@ -81,6 +81,7 @@
         domain_name: "{{ ansible_default_ipv4.address|default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
         # PHP vars
         php_version: '7.4'
+        php_default_version_debian: "{{ php_version }}"
         php_webserver_daemon: "nginx"
         # MySQL vars
         mysql_root_password_update: true
