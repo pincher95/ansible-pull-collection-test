@@ -1,6 +1,6 @@
 ---
 - hosts: all
-# connection: local
+  connection: local
   # become: true
   # Init vars to be replaced in general role
   vars:
