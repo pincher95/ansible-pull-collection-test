@@ -9,7 +9,7 @@
     email: nobody@omc.co.il
     password: verysecurerandompassword
 
-  # vars_files: 
+  # vars_files:
   #   - vars/main.yml
   # environment:
   #   ANSIBLE_CONFIG: "{{ ansible_pull['dest'] }}/ansible.cfg"
@@ -51,7 +51,7 @@
 
 
   post_tasks:
-    
+
     - name: Wordpress service
       ansible.builtin.include_role:
         name: "{{ roles.role }}"
@@ -77,13 +77,13 @@
         # Certbot vars
         certbot_certs:
           - email: "{{ adminemail }}"
-            domains: 
+            domains:
               - "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
         certbot_testmode: true
         # nginx-enable-ssl-letsencrypt vars
         domain_name: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
         # PHP vars
-        php_version: '8.1'
+        php_version: '7.4'
         php_default_version_debian: "{{ php_version }}"
         php_webserver_daemon: "{{ service_webserver }}"
         # MySQL vars
@@ -94,8 +94,8 @@
         # PhpMyAdmin vars
         phpmyadmin_webserver: "{{ service_webserver }}"
         phpmyadmin_version: '5.1.1'
-        
-    
+
+
     # - name: General role
     #   ansible.builtin.include_role:
     #     name: general
@@ -144,7 +144,7 @@
     #     apply:
     #       tags: ["certbot", "wordpress"]
     #   tags: ["certbot", "wordpress"]
-      
+
     # - name: PHP version role
     #   ansible.builtin.include_role:
     #     name: php_version
