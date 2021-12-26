@@ -50,7 +50,7 @@
   #     tags: always
 
 
-  post_tasks:
+  tasks:
 
     - name: Wordpress service
       ansible.builtin.include_role:
@@ -151,3 +151,8 @@
     #     apply:
     #       tags: ["php_version", "wordpress"]
     #   tags: ["php_version", "wordpress"]
+
+  post_tasks:
+  - name: Reboot the machine with all defaults using Ansible
+    reboot:
+      msg: "Server rebooted"
