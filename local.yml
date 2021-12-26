@@ -49,9 +49,7 @@
   #     ansible.builtin.include_tasks: install.yml
   #     tags: always
 
-
   tasks:
-
     - name: Wordpress service
       ansible.builtin.include_role:
         name: "{{ roles.role }}"
@@ -154,5 +152,5 @@
 
   post_tasks:
   - name: Reboot the machine with all defaults using Ansible
-    reboot:
-      msg: "Server rebooted"
+    ansible.builtin.command: reboot
+      # msg: "Server rebooted"
