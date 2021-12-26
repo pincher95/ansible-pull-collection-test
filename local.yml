@@ -1,12 +1,12 @@
 ---
 - hosts: all
-  # connection: local
+  connection: local
   become: true
   # Init vars to be replaced in general role
   vars:
-    adminemail: ""
     zone: IL-HA
     email: nobody@omc.co.il
+    adminemail: "{{ email }}"
     password: verysecurerandompassword
 
   # vars_files:
