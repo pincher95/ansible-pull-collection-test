@@ -1,7 +1,4 @@
 ---
-# roles:
-#   - name: geerlingguy.apache
-
 collections:
   - type: url
     source: https://github.com/pincher95/ansible-pull-collection-test/releases/download/v0.0.1/pincher95-cloudwm_collection-1.0.2.tar.gz
