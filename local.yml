@@ -150,7 +150,7 @@
     #       tags: ["php_version", "wordpress"]
     #   tags: ["php_version", "wordpress"]
 
-  post_tasks:
-  - name: Reboot the machine with all defaults using Ansible
-    ansible.builtin.command: reboot
-      # msg: "Server rebooted"
+  # post_tasks:
+  # - name: Reboot the machine with all defaults using Ansible
+  #   ansible.builtin.command: reboot
+  #     # msg: "Server rebooted"
