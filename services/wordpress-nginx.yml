@@ -4,7 +4,6 @@
     name: "{{ roles.role }}"
   loop_control:
     loop_var: roles
-  # when: service is defined and service == "wordpress-nginx"
   loop:
     - role: general
     - role: nginx
@@ -26,7 +25,7 @@
       - email: "{{ adminemail }}"
         domains:
           - "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
-    certbot_testmode: true
+    certbot_testmode: false
     # nginx-enable-ssl-letsencrypt vars
     domain_name: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
     # PHP vars
