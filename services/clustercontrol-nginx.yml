@@ -2,6 +2,9 @@
 - name: ClusterControl service
   ansible.builtin.include_role:
     name: "{{ roles.role }}"
+    apply:
+      tags: controller
+  tags: controller
   loop_control:
     loop_var: roles
   loop:
