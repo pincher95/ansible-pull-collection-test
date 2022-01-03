@@ -1,0 +1,44 @@
+---
+- name: ClusterControl service
+  ansible.builtin.include_role:
+    name: "{{ roles.role }}"
+  loop_control:
+    loop_var: roles
+  loop:
+    - role: general
+    - role: nginx
+    - role: certbot
+    - role: nginx-enable-ssl-letsencrypt
+    # - role: sendmail
+    - role: php_versions
+    # - role: php
+    # - role: mysql
+    - role: php-mysql
+    - role: clustercontrol
+  vars:
+    service_webserver: "nginx"
+    # General vars
+    upgrade_os: false
+    # Certbot vars
+    certbot_certs:
+      - email: "{{ adminemail }}"
+        domains:
+          - "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
+    certbot_testmode: false
+    # nginx-enable-ssl-letsencrypt vars
+    domain_name: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
+    # PHP vars
+    php_version: '7.4'
+    php_default_version_debian: "{{ php_version }}"
+    php_webserver_daemon: "{{ service_webserver }}"
+    # MySQL vars
+    mysql_root_password_update: true
+    mysql_root_password: "{{ password }}"
+    mysql_bind_address: '127.0.0.1'
+    # ClusterControl
+    cmon_mysql_password: "{{ password }}"
+    cc_admin:
+      # nothing happens unless 'set: true'
+      - set: true
+        email: "{{ adminemail }}"
+        password: "{{ password }}"

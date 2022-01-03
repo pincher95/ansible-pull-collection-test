@@ -18,7 +18,8 @@
       tags: always
 
   tasks:
-    - ansible.builtin.include_tasks: "services/{{ service }}.yml"
+    - name: Running {{ servire }}
+      ansible.builtin.include_tasks: "services/{{ service }}.yml"
       when: service is defined
 
   # post_tasks:
