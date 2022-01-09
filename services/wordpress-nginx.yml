@@ -33,11 +33,13 @@
     php_default_version_debian: "{{ php_version }}"
     php_webserver_daemon: "{{ service_webserver }}"
     # MySQL vars
-    mysql_root_password_update: true
+    # mysql_root_password_update: true
+    mysql_daemon: mysqld
     mysql_root_password: "{{ password }}"
     mysql_bind_address: '127.0.0.1'
     # Wordpress vars
     wordpress_version: '5.8.2'
     # PhpMyAdmin vars
     phpmyadmin_webserver: "{{ service_webserver }}"
+    phpmyadmin_mysql_password: "{{ mysql_root_password }}"
     phpmyadmin_version: '5.1.1'
