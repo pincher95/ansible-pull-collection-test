@@ -5,17 +5,12 @@
   loop_control:
     loop_var: roles
   loop:
-    - role: general
-    - role: nginx
-    - role: certbot
-    - role: nginx-enable-ssl-letsencrypt
-    - role: sendmail
-    - role: php_versions
-    # - role: php
-    # - role: mysql
-    - role: php-mysql
-    - role: phpmyadmin
-    - role: wordpress
+    - role: ansible-common-role
+    - role: ansible-sendmail-role
+    - role: ansible-phpmyadmin-role
+    - role: ansible-certbot-role
+    - role: ansible-nginx-enable-letsencrypt-role
+    - role: ansible-wordpress-role
   vars:
     service_webserver: "nginx"
     # General vars
@@ -35,12 +30,12 @@
     # MySQL vars
     # mysql_root_password_update: true
     mysql_daemon: mysqld
-    mysql_version: 8.0
+    mysql_default_version: 8.0
     mysql_root_password: "{{ password }}"
     mysql_bind_address: '127.0.0.1'
     # Wordpress vars
-    wordpress_version: '5.8.2'
+    wordpress_version: '5.8.3'
     # PhpMyAdmin vars
     phpmyadmin_webserver: "{{ service_webserver }}"
     phpmyadmin_mysql_password: "{{ mysql_root_password }}"
-    phpmyadmin_version: '5.1.1'
+    phpmyadmin_version: '5.1.2'
