@@ -38,7 +38,7 @@
     mysql_bind_address: '127.0.0.1'
     # ClusterControl
     clustercontrol_webserver: nginx
-    clustercontrol_mysql_daemon: "{{ mysql_daemon }}"
+    clustercontrol_mysql_daemon: mysql
     cmon_mysql_password: "{{ password }}"
     cc_admin:
       # nothing happens unless 'set: true'
