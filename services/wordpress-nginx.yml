@@ -35,7 +35,7 @@
     # MySQL vars
     # mysql_root_password_update: true
     mysql_daemon: mysqld
-    mysql_default_version: 8.0
+    mysql_version: 8.0
     mysql_root_password: "{{ password }}"
     mysql_bind_address: '127.0.0.1'
     # Wordpress vars
