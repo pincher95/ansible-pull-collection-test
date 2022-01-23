@@ -1,5 +1,5 @@
 ---
 collections:
   - type: url
-    source: https://github.com/pincher95/ansible-pull-collection-test/releases/download/v1.0.3/pincher95-cloudwm_collection-1.0.3.tar.gz
+    source: https://github.com/pincher95/ansible-pull-collection-test/releases/download/v1.0.4/pincher95-cloudwm_collection-1.0.4.tar.gz
   # - name: community.general

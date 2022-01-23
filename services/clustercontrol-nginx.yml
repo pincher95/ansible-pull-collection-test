@@ -8,16 +8,10 @@
   loop_control:
     loop_var: roles
   loop:
-    - role: general
-    - role: nginx
-    - role: certbot
-    - role: nginx-enable-ssl-letsencrypt
-    # - role: sendmail
-    - role: php_versions
-    # - role: php
-    # - role: mysql
-    - role: php-mysql
-    - role: clustercontrol
+    - role: ansible-common-role
+    - role: ansible-certbot-role
+    - role: ansible-nginx-enable-letsencrypt-role
+    - role: ansible-clustercontrol-role
   vars:
     service_webserver: "nginx"
     # General vars
@@ -34,11 +28,16 @@
     php_version: '7.4'
     php_default_version_debian: "{{ php_version }}"
     php_webserver_daemon: "{{ service_webserver }}"
+    php_install_recommends: false
+    php_enable_php_fpm: true
     # MySQL vars
     mysql_root_password_update: true
+    mysql_daemon: mysqld
     mysql_root_password: "{{ password }}"
     mysql_bind_address: '127.0.0.1'
     # ClusterControl
+    clustercontrol_webserver: nginx
+    clustercontrol_mysql_daemon: "{{ mysql_daemon }}"
     cmon_mysql_password: "{{ password }}"
     cc_admin:
       # nothing happens unless 'set: true'
