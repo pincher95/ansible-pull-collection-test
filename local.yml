@@ -7,7 +7,7 @@
     zone: IL-HA
     email: nobody@omc.co.il
     adminemail: "{{ email }}"
-    password: verysecurerandompassword
+    password: ""
 
   pre_tasks:
 
