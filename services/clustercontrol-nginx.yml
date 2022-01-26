@@ -10,8 +10,9 @@
   loop:
     - role: ansible-common-role
     - role: ansible-clustercontrol-role
-    - role: ansible-certbot-role
     - role: ansible-nginx-enable-letsencrypt-role
+    - role: ansible-certbot-role
+    
   vars:
     service_webserver: "nginx"
     # General vars
