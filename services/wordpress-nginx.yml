@@ -35,7 +35,7 @@
     mysql_bind_address: '127.0.0.1'
     # Wordpress vars
     wordpress_webserver: nginx
-    wordpress_version: '5.8.3'
+    wordpress_version: '5.9'
     wordpress_password: "{{ password }}"
     # PhpMyAdmin vars
     # phpMyAdmin
