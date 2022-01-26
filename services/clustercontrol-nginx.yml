@@ -12,7 +12,6 @@
     - role: ansible-clustercontrol-role
     - role: ansible-certbot-role
     - role: ansible-nginx-enable-letsencrypt-role
-
   vars:
     service_webserver: "nginx"
     # General vars
