@@ -24,7 +24,7 @@
     # nginx-enable-ssl-letsencrypt vars
     domain_name: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
     # PHP vars
-    php_version: '7.4'
+    php_version: '8.1'
     php_default_version_debian: "{{ php_version }}"
     php_webserver_daemon: "{{ service_webserver }}"
     # MySQL vars
@@ -41,4 +41,4 @@
     # phpMyAdmin
     phpmyadmin_webserver: nginx
     phpmyadmin_mysql_password: "{{ password }}"
-    phpmyadmin_version: '5.1.2'
+    phpmyadmin_version: '5.1.3'
