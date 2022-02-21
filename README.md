@@ -1,1 +1,1 @@
-# Ansible pull collection test
+# Ansible pull collection
