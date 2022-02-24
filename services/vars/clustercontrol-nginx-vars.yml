@@ -1,0 +1,31 @@
+---
+service_webserver: "nginx"
+# General vars
+upgrade_os: false
+# Certbot vars
+certbot_certs:
+  - email: "{{ adminemail }}"
+    domains:
+      - "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
+certbot_testmode: false
+# nginx-enable-ssl-letsencrypt vars
+domain_name: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
+# PHP vars
+php_version: '8.1'
+php_default_version_debian: "{{ php_version }}"
+php_webserver_daemon: "{{ service_webserver }}"
+# MySQL vars
+# mysql_root_password_update: true
+mysql_daemon: mysqld
+mysql_default_version: 8.0
+mysql_root_password: "{{ password }}"
+mysql_bind_address: '127.0.0.1'
+# Wordpress vars
+wordpress_webserver: "{{ service_webserver }}"
+wordpress_version: '5.9'
+wordpress_password: "{{ password }}"
+# PhpMyAdmin vars
+# phpMyAdmin
+phpmyadmin_webserver: "{{ service_webserver }}"
+phpmyadmin_mysql_password: "{{ password }}"
+phpmyadmin_version: '5.1.3'
