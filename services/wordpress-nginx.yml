@@ -5,9 +5,9 @@
   loop_control:
     loop_var: roles
   loop:
-    - role: cloudwm.ansible-common-role
-    - role: cloudwm.ansible-sendmail-role
-    - role: cloudwm.ansible-phpmyadmin-role
-    - role: cloudwm.ansible-certbot-role
-    - role: cloudwm.ansible-nginx-enable-letsencrypt-role
-    - role: cloudwm.ansible-wordpress-role
+    - role: cloudwm.ansible_cloudwm_collection.ansible-common-role
+    - role: cloudwm.ansible_cloudwm_collection.ansible-sendmail-role
+    - role: cloudwm.ansible_cloudwm_collection.ansible-phpmyadmin-role
+    - role: cloudwm.ansible_cloudwm_collection.ansible-certbot-role
+    - role: cloudwm.ansible_cloudwm_collection.ansible-nginx-enable-letsencrypt-role
+    - role: cloudwm.ansible_cloudwm_collection.ansible-wordpress-role
