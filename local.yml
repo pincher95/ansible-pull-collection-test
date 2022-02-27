@@ -18,7 +18,7 @@
       tags: always
 
   tasks:
-    - name: Load wordpress service vars
+    - name: Load {{ service }} service vars
       ansible.builtin.include_vars: "services/vars/{{ service }}-vars.yml"
 
     - name: Running {{ service }}
