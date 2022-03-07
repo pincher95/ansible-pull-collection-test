@@ -1,4 +1,7 @@
 ---
+adminemail: test@molecule.com
+password: 'Omci1234!1234@'
+
 service_webserver: apache
 
 certbot_certs:
