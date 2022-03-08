@@ -5,8 +5,8 @@
   loop_control:
     loop_var: roles
   loop:
-    - role: geerlingguy.repo-remi
-      when: ansible_os_family == 'RedHat'
+    # - role: geerlingguy.repo-remi
+    #   when: ansible_os_family == 'RedHat'
     - role: geerlingguy.repo-dotdeb
       when: ansible_distribution == 'Debian'
     # - role: ansible-common-role

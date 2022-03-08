@@ -1,7 +1,4 @@
 ---
-adminemail: test@molecule.com
-password: 'Omci1234!1234@'
-
 service_webserver: apache
 
 certbot_certs:
@@ -42,6 +39,8 @@ apache_vhosts:
 
 drupal_db_password: "{{ password }}"
 drupal_account_pass: "{{ password }}"
+drupal_deploy_composer_install: false
+# drupal_deploy: false
 
 mysql_python_package_debian: python3-mysqldb
 mysql_enablerepo: "remi"
