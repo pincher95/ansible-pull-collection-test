@@ -6,4 +6,4 @@
     loop_var: roles
   loop:
     - role: ansible-common-role
-    - role: ansible-postgres-role
+    - role: ansible-postgresql-role
