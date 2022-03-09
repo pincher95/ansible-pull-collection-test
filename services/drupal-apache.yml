@@ -5,22 +5,21 @@
   loop_control:
     loop_var: roles
   loop:
+    - role: ansible-common-role
     # - role: geerlingguy.repo-remi
     #   when: ansible_os_family == 'RedHat'
     - role: geerlingguy.repo-dotdeb
       when: ansible_distribution == 'Debian'
     # - role: ansible-common-role
     #   tags: molecule
-    - role: ansible-apache-role
-      when: service_webserver == 'apache'
-    - role: ansible-nginx-role
-      when: service_webserver == 'nginx'
     - role: ansible-nginx-enable-letsencrypt-role
       when: service_webserver == 'nginx'
     - role: ansible-certbot-role
-    - role: ansible-mysql-role
     - role: ansible-php-mysql-role
     - role: geerlingguy.git
     - role: geerlingguy.composer
     - role: geerlingguy.drush
     - role: ansible-drupal-role
+    - role: ansible-mysql-role
+    - role: ansible-apache-role
+      when: service_webserver == 'apache'

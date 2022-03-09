@@ -21,6 +21,18 @@ mysql_daemon: mysqld
 mysql_version: 8.0
 mysql_root_password: "{{ password }}"
 
+drupal_db_user: "drupal"
+drupal_db_password: "{{ password }}"
+drupal_account_pass: "{{ password }}"
+drupal_deploy_composer_install: false
+drupal_build_composer_project: false
+drupal_build_composer: false
+drupal_install_site: false
+drupal_db_name: "drupal"
+drupal_domain: "{{ domain_name }}"
+drupal_core_path: "/var/www/drupal/web"
+# drupal_deploy: false
+
 apache_mods_enabled:
   - expires.load
   - ssl.load
@@ -36,11 +48,6 @@ apache_vhosts:
           <FilesMatch \.php$>
             SetHandler "proxy:fcgi://{{ php_fpm_listen }}"
           </FilesMatch>
-
-drupal_db_password: "{{ password }}"
-drupal_account_pass: "{{ password }}"
-drupal_deploy_composer_install: false
-# drupal_deploy: false
 
 mysql_python_package_debian: python3-mysqldb
 mysql_enablerepo: "remi"

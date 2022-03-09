@@ -1,4 +1,5 @@
 ---
+
 service_webserver: "nginx"
 # General vars
 upgrade_os: false
