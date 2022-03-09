@@ -1,4 +1,4 @@
 ---
 collections:
   - type: url
-    source: https://github.com/cloudwm/ansible-pull-collection/releases/download/v1.0.7/cloudwm-ansible_cloudwm_collection-1.0.7.tar.gz
+    source: https://github.com/cloudwm/ansible-pull-collection/releases/download/v1.0.8/cloudwm-ansible_cloudwm_collection-1.0.8.tar.gz
