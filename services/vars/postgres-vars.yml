@@ -14,8 +14,7 @@ ubuntu:
     - networkd-dispatcher
   ufw:
     - 22
-    - 80
-    - 443
+    - 5432
   sysctl:
     - name: vm.swappiness
       value: 1
