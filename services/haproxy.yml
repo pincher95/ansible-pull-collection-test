@@ -1,0 +1,9 @@
+---
+- name: HAProxy service
+  ansible.builtin.include_role:
+    name: "{{ roles.role }}"
+  loop_control:
+    loop_var: roles
+  loop:
+    - role: ansible-common-role
+    - role: ansible-haproxy-role
