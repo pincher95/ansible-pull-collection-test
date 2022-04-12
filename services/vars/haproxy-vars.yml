@@ -1,0 +1,52 @@
+---
+# General vars
+upgrade_os: false
+# Certbot vars
+domain_name: "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
+certbot_certs:
+  - email: "{{ adminemail }}"
+    domains:
+      - "{{ ansible_default_ipv4.address | default(ansible_all_ipv4_addresses[0]) | replace('.', '-') }}.cloud-xip.io"
+certbot_auto_renew: true
+certbot_testmode: false
+certbot_create_method: 'standalone'
+certbot_webserver: none
+# HAProxy vars
+haproxy_use_dataplanapi: true
+haproxy_dataplanapi_password: "{{ password }}"
+haproxy_dataplanapi_host: "127.0.0.1"
+haproxy_dataplanapi_port: 5555
+haproxy_frontend_stats_pass: "{{ password }}"
+haproxy_frontend_stats_port: 8404
+haproxy_global_master_worker: true
+haproxy_global_stats:
+  sockets:
+    - listen: /run/haproxy/admin.sock
+      param: ["user haproxy", "group haproxy", "mode 660", "level admin", "expose-fd", "listeners"]
+  timeout: 30s
+haproxy_global_crt_base: "/etc/letsencrypt/live/{{ domain_name }}"
+haproxy_global_ssl_default_server_ciphers: 'ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384'
+haproxy_global_ssl_default_server_ciphersuites: 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256'
+haproxy_global_ssl_default_server_options: 'no-sslv3 no-tlsv10 no-tlsv11 no-tls-tickets'
+haproxy_global_ssl_default_bind_ciphers: ' ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384'
+haproxy_global_ssl_default_bind_ciphersuites: 'TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256'
+haproxy_global_ssl_default_bind_options: 'no-sslv3 no-tlsv10 no-tlsv11 no-tls-tickets'
+haproxy_defaults_logformat: 'frontend:%f/%H/%fi:%fp\ client:%ci:%cp\ GMT:%T\ body:%[capture.req.hdr(0)]\ request:%r'
+haproxy_defaults_option:
+  - dontlognull
+  - log-separate-errors
+  - dontlog-normal
+haproxy_frontend:
+  - name: stats
+    bind:
+      - listen: '*:8404'
+        param:
+          - ssl
+          - crt
+          - "{{ haproxy_letsencrypt_ssl_haproxy_fullcert_name }}"
+    raw_options:
+      - stats enable
+      - stats uri /stats
+      - stats refresh 10s
+      - stats auth admin:"{{ haproxy_frontend_stats_pass }}"
+      - stats hide-version
