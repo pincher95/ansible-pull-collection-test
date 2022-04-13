@@ -50,3 +50,11 @@ haproxy_frontend:
       - stats refresh 10s
       - stats auth admin:"{{ haproxy_frontend_stats_pass }}"
       - stats hide-version
+# HAProxy lb vars
+servicelet:
+  - key: id
+    value: "{{ serverid }}"
+  - key: apiKey
+    value: "{{ apisecret }}"
+  - key: apiSecret
+    value: "{{ apiclientid }}"
