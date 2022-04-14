@@ -1,4 +1,5 @@
 ---
+
 service_webserver: "nginx"
 # General vars
 upgrade_os: false
@@ -22,6 +23,7 @@ mysql_daemon: mysqld
 mysql_default_version: 8.0
 mysql_root_password: "{{ password }}"
 mysql_bind_address: '127.0.0.1'
+mysql_firewall_allow: false
 # ClusterControl
 clustercontrol_webserver: nginx
 clustercontrol_mysql_daemon: mysql
