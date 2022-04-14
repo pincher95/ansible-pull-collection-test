@@ -1,0 +1,4 @@
+---
+# Postgresql vars
+postgresql_port: "5432"
+postgresql_bind_address: "0.0.0.0"

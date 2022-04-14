@@ -20,9 +20,10 @@ mysql_daemon: mysqld
 mysql_default_version: 8.0
 mysql_root_password: "{{ password }}"
 mysql_bind_address: '127.0.0.1'
+mysql_firewall_allow: false
 # Wordpress vars
 wordpress_webserver: "{{ service_webserver }}"
-wordpress_version: '5.9'
+wordpress_version: '5.9.3'
 wordpress_password: "{{ password }}"
 # PhpMyAdmin vars
 # phpMyAdmin
