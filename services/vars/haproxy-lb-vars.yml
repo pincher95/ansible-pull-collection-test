@@ -55,6 +55,6 @@ servicelet:
   - key: id
     value: "{{ serverid }}"
   - key: apiKey
-    value: "{{ apisecret }}"
-  - key: apiSecret
     value: "{{ apiclientid }}"
+  - key: apiSecret
+    value: "{{ apisecret }}"
