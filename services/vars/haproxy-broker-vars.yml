@@ -35,9 +35,8 @@ haproxy_global_ssl_default_bind_options: 'no-sslv3 no-tlsv10 no-tlsv11 no-tls-ti
 haproxy_global_nbthread: 4
 haproxy_global_cpu_map: 'auto:1/1-4 0-3'
 haproxy_global_tune:
-  - tune:
-      key: 'lua.session-timeout'
-      value: '25s'
+  - key: 'lua.session-timeout'
+    value: '25s'
 haproxy_global_lua_load: '/etc/haproxy/ipchecker.lua'
 haproxy_defaults_logformat: 'frontend:%f/%H/%fi:%fp\ client:%ci:%cp\ GMT:%T\ body:%[capture.req.hdr(0)]\ request:%r'
 haproxy_defaults_option:
