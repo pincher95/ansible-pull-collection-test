@@ -70,8 +70,8 @@ haproxy_frontend:
     tcp_request_inspect_delay:
       - timeout: 60000
     tcp_request_content:
-      action: accept
-      cond: 'if RDP_COOKIE'
+      - action: accept
+        cond: 'if RDP_COOKIE'
     use_backend: '"%[req.rdp_cookie(mstshash),lower,map_reg(/etc/haproxy/maps/rdp.map)]" if { req.rdp_cookie(mstshash),lower,map_reg(/etc/haproxy/maps/rdp.map) -m found }'
     raw_options:
       - log /dev/log local0 debug
