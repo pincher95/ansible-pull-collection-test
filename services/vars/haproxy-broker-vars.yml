@@ -16,7 +16,8 @@ haproxy_use_dataplanapi: true
 haproxy_dataplanapi_password: "{{ password }}"
 haproxy_dataplanapi_host: "127.0.0.1"
 haproxy_dataplanapi_port: 5555
-haproxy_dataplanapi_params: '--update-map-files'
+haproxy_dataplanapi_params:
+  - '--update-map-files'
 haproxy_frontend_stats_pass: "{{ password }}"
 haproxy_frontend_stats_port: 8404
 haproxy_global_master_worker: true
