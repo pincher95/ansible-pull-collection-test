@@ -67,7 +67,8 @@ haproxy_frontend:
       - tcplog
       - dontlognull
       - logasap
-    tcp_request_inspect_delay: 60000
+    tcp_request_inspect_delay:
+      - timeout: 60000
     tcp_request_content:
       action: accept
       cond: 'if RDP_COOKIE'
@@ -77,8 +78,7 @@ haproxy_frontend:
   - name: null.cloudwm.com
     bind:
       - listen: '127.0.0.1:30080'
-        param:
-          - 'name null.cloudwm.com'
+        param: ['name null.cloudwm.com']
     default_backend: 'null_cloudwm'
 haproxy_backend:
   - name: 'null_cloudwm'
@@ -88,14 +88,12 @@ haproxy_backend:
       - log-health-checks
       - httpchk
     http-check: 'expect rstatus 200'
-    default_server_params:
-      - 'inter 3s fall 3 rise 2'
+    default_server_params: ['inter 3s fall 3 rise 2']
     cookie: 'SERVERUSED indirect nocache insert'
     server:
       - name: 'null.cloudwm.com'
         listen: 'null.cloudwm.com:443'
-        param:
-          - 'check ssl verify none'
+        param: ['check ssl verify none']
 
 # HAProxy lb vars
 servicelet:
