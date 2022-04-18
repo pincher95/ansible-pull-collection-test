@@ -1,4 +1,14 @@
 ---
+- name: Create rdp.map/ipchecker.lua files
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: "{{ item.state }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - { path: /etc/haproxy, state: directory, mode: 0755}
+    - { path: /etc/haproxy/maps/rdp.map, state: touch, mode: 0644}
+    - { path: /etc/haproxy/ipchecker.lua, state: touch, mode: 0644}
+
 - name: HAProxy service
   ansible.builtin.include_role:
     name: "{{ roles.role }}"
@@ -7,4 +17,3 @@
   loop:
     - role: ansible-common-role
     - role: ansible-haproxy-broker-role
-    - role: ansible-haproxy-role
