@@ -6,5 +6,5 @@
     loop_var: roles
   loop:
     - role: ansible-common-role
-    - role: ansible-haproxy-role
     - role: ansible-haproxy-broker-role
+    - role: ansible-haproxy-role
