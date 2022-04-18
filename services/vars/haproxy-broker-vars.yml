@@ -16,7 +16,7 @@ haproxy_use_dataplanapi: true
 haproxy_dataplanapi_password: "{{ password }}"
 haproxy_dataplanapi_host: "127.0.0.1"
 haproxy_dataplanapi_port: 5555
-haproxy_dataplanapi_params: '--update-map-files'
+haproxy_dataplanapi_params: ['--update-map-files']
 haproxy_frontend_stats_pass: "{{ password }}"
 haproxy_frontend_stats_port: 8404
 haproxy_global_master_worker: true
@@ -35,9 +35,8 @@ haproxy_global_ssl_default_bind_options: 'no-sslv3 no-tlsv10 no-tlsv11 no-tls-ti
 haproxy_global_nbthread: 4
 haproxy_global_cpu_map: 'auto:1/1-4 0-3'
 haproxy_global_tune:
-  - tune:
-      key: 'lua.session-timeout'
-      value: '25s'
+  - key: 'lua.session-timeout'
+    value: '25s'
 haproxy_global_lua_load: '/etc/haproxy/ipchecker.lua'
 haproxy_defaults_logformat: 'frontend:%f/%H/%fi:%fp\ client:%ci:%cp\ GMT:%T\ body:%[capture.req.hdr(0)]\ request:%r'
 haproxy_defaults_option:
@@ -68,18 +67,18 @@ haproxy_frontend:
       - tcplog
       - dontlognull
       - logasap
-    tcp_request_inspect_delay: 60000
+    tcp_request_inspect_delay:
+      - timeout: 60000
     tcp_request_content:
-      action: accept
-      cond: 'if RDP_COOKIE'
+      - action: accept
+        cond: 'if RDP_COOKIE'
     use_backend: '"%[req.rdp_cookie(mstshash),lower,map_reg(/etc/haproxy/maps/rdp.map)]" if { req.rdp_cookie(mstshash),lower,map_reg(/etc/haproxy/maps/rdp.map) -m found }'
     raw_options:
       - log /dev/log local0 debug
   - name: null.cloudwm.com
     bind:
       - listen: '127.0.0.1:30080'
-        param:
-          - 'name null.cloudwm.com'
+        param: ['name null.cloudwm.com']
     default_backend: 'null_cloudwm'
 haproxy_backend:
   - name: 'null_cloudwm'
@@ -89,14 +88,12 @@ haproxy_backend:
       - log-health-checks
       - httpchk
     http-check: 'expect rstatus 200'
-    default_server_params:
-      - 'inter 3s fall 3 rise 2'
+    default_server_params: ['inter 3s fall 3 rise 2']
     cookie: 'SERVERUSED indirect nocache insert'
     server:
       - name: 'null.cloudwm.com'
         listen: 'null.cloudwm.com:443'
-        param:
-          - 'check ssl verify none'
+        param: ['check ssl verify none']
 
 # HAProxy lb vars
 servicelet:
