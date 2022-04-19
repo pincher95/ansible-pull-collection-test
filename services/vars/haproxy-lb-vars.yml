@@ -58,3 +58,7 @@ servicelet:
     value: "{{ apiclientid }}"
   - key: apiSecret
     value: "{{ apisecret }}"
+  - key: dataplaneapiPassword
+    value: "{{ password }}"
+  - key: timezone
+    value: "Asia/Jerusalem"
